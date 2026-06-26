@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minka Barber Studio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="img/logo_minka.png">
+</head>
+
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header id="navbar">
+    <div class="nav-container">
+      <a href="#inicio" class="logo">
+        <span class="logo-icon"></span>
+        <div class="logo-text">
+          <span class="logo-main">MINKA</span>
+          <span class="logo-sub">BARBER STUDIO</span>
+        </div>
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#barberos">Barberos</a>
+        <a href="#reservas">Reservas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="inicio" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content" data-animate>
+      <p class="hero-eyebrow">Trujillo, Perú &nbsp;·&nbsp; 2026</p>
+      <h1 class="hero-title">
+        Estilo que define<br />
+        <em>tu personalidad</em>
+      </h1>
+      <p class="hero-subtitle">
+        Precisión, técnica y detalle en cada corte<br />
+        Tu estilo, tu flow
+      </p>
+      <a href="#reservas" class="btn-primary">Reservar ahora</a>
+    </div>
+    <div class="hero-scroll"><span></span></div>
+  </section>
+
+  <!-- ===================== STATS BAR ===================== -->
+  <section class="stats-bar" data-animate>
+    <div class="stat"><strong>6+</strong><span>Años de experiencia</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><strong>3K+</strong><span>Clientes satisfechos</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><strong>4</strong><span>Barberos expertos</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><strong>100%</strong><span>Satisfacción garantizada</span></div>
+  </section>
+
+  <!-- ===================== SERVICIOS ===================== -->
+  <section id="servicios" class="section-services">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <p class="eyebrow">Nuestros servicios</p>
+        <h2>Lo que hacemos mejor</h2>
+        <p class="section-desc">Cada servicio es ejecutado con productos premium y técnica especializada.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card" data-animate>
+          <div class="service-icon"><i class="fas fa-cut"></i></div>
+          <div class="service-info">
+            <h3>Corte Clásico</h3>
+            <p>Tijera y máquina con acabado perfecto. Incluye lavado y peinado final.</p>
+            <div class="service-footer">
+              <span class="price">S/ 20</span>
+              <a href="#reservas" class="btn-reserve">Reservar</a>
+            </div>
+          </div>
+          <div class="card-accent"></div>
+        </div>
+        <div class="service-card featured" data-animate>
+          <span class="badge">Popular</span>
+          <div class="service-icon"><i class="fas fa-magic"></i></div>
+          <div class="service-info">
+            <h3>Fade Premium</h3>
+            <p>Degradado milimétrico con transición perfecta. Low, mid o high fade a tu elección.</p>
+            <div class="service-footer">
+              <span class="price">S/ 30</span>
+              <a href="#reservas" class="btn-reserve">Reservar</a>
+            </div>
+          </div>
+          <div class="card-accent"></div>
+        </div>
+        <div class="service-card" data-animate>
+          <div class="service-icon"><i class="fas fa-spa"></i></div>
+          <div class="service-info">
+            <h3>Arreglo de Barba</h3>
+            <p>Perfilado, hidratación y afeitado con navaja. Tu barba, perfectamente definida.</p>
+            <div class="service-footer">
+              <span class="price">S/ 20</span>
+              <a href="#reservas" class="btn-reserve">Reservar</a>
+            </div>
+          </div>
+          <div class="card-accent"></div>
+        </div>
+        <div class="service-card" data-animate>
+          <div class="service-icon"><i class="fas fa-star"></i></div>
+          <div class="service-info">
+            <h3>Corte + Barba</h3>
+            <p>La experiencia completa. Corte a elección más arreglo total de barba con productos importados.</p>
+            <div class="service-footer">
+              <span class="price">S/ 45</span>
+              <a href="#reservas" class="btn-reserve">Reservar</a>
+            </div>
+          </div>
+          <div class="card-accent"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROMOCIONES ===================== -->
+  <!-- Para actualizar promociones: edita las tarjetas dentro de .promos-grid         -->
+  <!-- Cada .promo-card puede tener la clase "promo-featured" para resaltarla         -->
+  <!-- Campos editables: .promo-name, .promo-desc, .promo-price, .promo-validity      -->
+  <section id="promociones" class="section-promos">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <p class="eyebrow">Ofertas especiales</p>
+        <h2>Promociones <em>vigentes</em></h2>
+        <p class="section-desc">Aprovecha nuestras ofertas por tiempo limitado.</p>
+      </div>
+
+      <div class="promos-grid" data-animate>
+
+        <!-- PROMO 1 — destacada -->
+        <div class="promo-card promo-featured">
+          <div class="promo-badge">Destacada</div>
+          <div class="promo-icon"><i class="fas fa-bolt"></i></div>
+          <h3 class="promo-name">Combo Flash</h3>
+          <p class="promo-desc">Corte Clásico + Arreglo de Barba completo con productos premium. El duo perfecto para
+            lucir impecable toda la semana.</p>
+          <div class="promo-price-wrap">
+            <span class="promo-original">S/ 40</span>
+            <span class="promo-price">S/ 30</span>
+          </div>
+          <p class="promo-validity"><i class="fas fa-calendar-alt"></i> Válido hasta el 31 de julio 2026</p>
+          <a href="#reservas" class="btn-primary" style="margin-top:20px; display:inline-block;">Aprovechar oferta</a>
+          <div class="card-accent"></div>
+        </div>
+
+        <!-- PROMO 2 -->
+        <div class="promo-card">
+          <div class="promo-icon"><i class="fas fa-user-friends"></i></div>
+          <h3 class="promo-name">Trae a un amigo</h3>
+          <p class="promo-desc">Ven con un amigo y ambos obtienen un 20% de descuento en cualquier servicio. ¡Más
+            estilo, menos gasto!</p>
+          <div class="promo-price-wrap">
+            <span class="promo-price">20% OFF</span>
+          </div>
+          <p class="promo-validity"><i class="fas fa-calendar-alt"></i> Sin fecha de vencimiento</p>
+          <div class="card-accent"></div>
+        </div>
+
+        <!-- PROMO 3 -->
+        <div class="promo-card">
+          <div class="promo-icon"><i class="fas fa-sync-alt"></i></div>
+          <h3 class="promo-name">Cliente frecuente</h3>
+          <p class="promo-desc">Tu 5ta visita es completamente gratis. Acumula tus cortes y disfruta de un servicio de
+            regalo.</p>
+          <div class="promo-price-wrap">
+            <span class="promo-price">Gratis</span>
+          </div>
+          <p class="promo-validity"><i class="fas fa-calendar-alt"></i> Permanente</p>
+          <div class="card-accent"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NUESTROS BARBEROS ===================== -->
+  <section id="barberos" class="section-barbers">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <p class="eyebrow">El equipo</p>
+        <h2>Nuestros <em>Barberos</em></h2>
+        <p class="section-desc">Profesionales apasionados por el arte del corte y el detalle.</p>
+      </div>
+
+      <div class="barbers-grid">
+
+        <div class="barber-card" data-animate>
+          <div class="barber-photo-wrap">
+            <div class="barber-photo"
+              style="background-image: url('https://img.freepik.com/fotos-premium/hombre-barbero-delantal-sobre-fondo-blanco-aislado-posando-brazos-cadera-sonriendo_1368-432425.jpg')">
+            </div>
+            <div class="barber-overlay">
+              <div class="barber-social">
+                <a href="https://www.instagram.com/vieri_alexander?igsh=ZjJ5ZG50bWx5bTFn" target="_blank"
+                  aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="barber-info">
+            <h3>Carlos Ríos</h3>
+            <span class="barber-specialty">Fade & Degradados</span>
+            <div class="barber-exp"><i class="fas fa-award"></i> 8 años de experiencia</div>
+          </div>
+          <div class="card-accent"></div>
+        </div>
+
+        <div class="barber-card" data-animate>
+          <div class="barber-photo-wrap">
+            <div class="barber-photo"
+              style="background-image: url('https://img.freepik.com/foto-gratis/peluquero-hombre-delantal-herramientas-peluqueria-mirando-camara-seria-expresion-confianza-pie-sobre-fondo-blanco_141793-118147.jpg?t=st=1688799126~exp=1688799726~hmac=13839a58f354b8a374b038fb4492d395294861fa18afd692397d32fda4275ed6')">
+            </div>
+            <div class="barber-overlay">
+              <div class="barber-social">
+                <a href="https://www.instagram.com/vieri_alexander?igsh=ZjJ5ZG50bWx5bTFn" target="_blank"
+                  aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="barber-info">
+            <h3>Diego Vargas</h3>
+            <span class="barber-specialty">Cortes Clásicos & Barba</span>
+            <div class="barber-exp"><i class="fas fa-award"></i> 6 años de experiencia</div>
+          </div>
+          <div class="card-accent"></div>
+        </div>
+
+        <div class="barber-card" data-animate>
+          <div class="barber-photo-wrap">
+            <div class="barber-photo"
+              style="background-image: url('https://img.freepik.com/premium-photo/european-man-hairdresser-barber-transparent-white-isol-white-background-white-background-hd-pho_873925-858365.jpg?w=2000')">
+            </div>
+            <div class="barber-overlay">
+              <div class="barber-social">
+                <a href="https://www.instagram.com/vieri_alexander?igsh=ZjJ5ZG50bWx5bTFn" target="_blank"
+                  aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="barber-info">
+            <h3>Martín Torres</h3>
+            <span class="barber-specialty">Diseño & Líneas</span>
+            <div class="barber-exp"><i class="fas fa-award"></i> 5 años de experiencia</div>
+          </div>
+          <div class="card-accent"></div>
+        </div>
+
+        <div class="barber-card" data-animate>
+          <div class="barber-photo-wrap">
+            <div class="barber-photo"
+              style="background-image: url('https://img.freepik.com/premium-photo/happy-barber-man-apron_1368-51194.jpg')">
+            </div>
+            <div class="barber-overlay">
+              <div class="barber-social">
+                <a href="https://www.instagram.com/vieri_alexander?igsh=ZjJ5ZG50bWx5bTFn" target="_blank"
+                  aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="barber-info">
+            <h3>Andrés Luna</h3>
+            <span class="barber-specialty">Cortes Modernos & Textura</span>
+            <div class="barber-exp"><i class="fas fa-award"></i> 4 años de experiencia</div>
+          </div>
+          <div class="card-accent"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALERÍA ===================== -->
+  <section id="galeria" class="section-gallery">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <p class="eyebrow">Nuestro trabajo</p>
+        <h2>Galería</h2>
+      </div>
+    </div>
+    <div class="gallery-grid" data-animate>
+      <div class="gallery-item"
+        style="background-image: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80')">
+        <div class="gallery-overlay"><span>Fade Clásico</span></div>
+      </div>
+      <div class="gallery-item tall"
+        style="background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80')">
+        <div class="gallery-overlay"><span>Corte + Barba</span></div>
+      </div>
+      <div class="gallery-item"
+        style="background-image: url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=80')">
+        <div class="gallery-overlay"><span>Degradado Premium</span></div>
+      </div>
+      <div class="gallery-item"
+        style="background-image: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80')">
+        <div class="gallery-overlay"><span>Barba Estilizada</span></div>
+      </div>
+      <div class="gallery-item wide"
+        style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=80')">
+        <div class="gallery-overlay"><span>Experiencia Minka</span></div>
+      </div>
+      <div class="gallery-item"
+        style="background-image: url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80')">
+        <div class="gallery-overlay"><span>Corte Moderno</span></div>
+      </div>
+      <div class="gallery-item"
+        style="background-image: url('https://images.unsplash.com/photo-1517832606299-7ae9b720a186?w=600&q=80')">
+        <div class="gallery-overlay"><span>Acabado Profesional</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIOS ===================== -->
+  <section id="testimonios" class="section-testimonials">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <p class="eyebrow">Lo que dicen</p>
+        <h2>Testimonios de <em>clientes</em></h2>
+      </div>
+
+      <!-- Carrusel de testimonios -->
+      <div class="testimonials-carousel" data-animate>
+        <div class="testimonials-track" id="testimonials-track">
+
+          <!-- Testimonio 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"El mejor fade que me han hecho en Trujillo. Carlos sabe exactamente lo que
+              quieres con solo describirlo. Salí sintiéndome otro."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-photo"
+                style="background-image: url('https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&q=80')">
+              </div>
+              <div>
+                <strong>Luis Mendoza</strong>
+                <span>Cliente desde 2023</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Vine por el combo flash y quedé impresionado. El ambiente es increíble, limpio
+              y con música buenísima. Ya no voy a ningún otro lado."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-photo"
+                style="background-image: url('https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&q=80')">
+              </div>
+              <div>
+                <strong>Rodrigo Castro</strong>
+                <span>Cliente desde 2024</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Diego me arregló la barba para mi boda. Quedé espectacular. Profesionalismo de
+              otro nivel y trato super amable. ¡100% recomendado!"</p>
+            <div class="testimonial-author">
+              <div class="testimonial-photo"
+                style="background-image: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&q=80')">
+              </div>
+              <div>
+                <strong>Sebastián Ruiz</strong>
+                <span>Cliente desde 2022</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 4 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Llevo más de 2 años yendo a Minka y nunca me han decepcionado. Martín tiene una
+              precisión increíble para los diseños. Mi barbería de cabecera."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-photo"
+                style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80')">
+              </div>
+              <div>
+                <strong>Fabián Morales</strong>
+                <span>Cliente desde 2021</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 5 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"La reserva por WhatsApp es súper fácil y rápida. Nunca hay que esperar. Andrés
+              siempre me hace quedar perfecto para el trabajo."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-photo"
+                style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80')">
+              </div>
+              <div>
+                <strong>Emilio Paredes</strong>
+                <span>Cliente desde 2024</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Controles del carrusel -->
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="carousel-prev" aria-label="Anterior">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <button class="carousel-btn" id="carousel-next" aria-label="Siguiente">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RESERVAS ===================== -->
+  <section id="reservas" class="section-booking">
+    <div class="container">
+      <div class="booking-wrapper" data-animate>
+        <div class="booking-info">
+          <p class="eyebrow" style="color: var(--gold)">Agenda tu cita</p>
+          <h2>Reserva<br /><em>en segundos</em></h2>
+          <p>Completa el formulario y te redirigiremos directo a WhatsApp para confirmar tu cita al instante.</p>
+          <ul class="booking-features">
+            <li><i class="fas fa-check-circle"></i> Sin esperas innecesarias</li>
+            <li><i class="fas fa-check-circle"></i> Confirmación inmediata</li>
+            <li><i class="fas fa-check-circle"></i> Lunes a Sábado, 9am – 8pm</li>
+          </ul>
+          <div class="booking-contact">
+            <i class="fab fa-whatsapp"></i>
+            <span>+51 901259859</span>
+          </div>
+        </div>
+
+        <div class="booking-form-wrap">
+          <form id="booking-form" novalidate>
+            <div class="form-group">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" placeholder="Ej: Carlos Ramírez" required />
+              <span class="form-error" id="error-nombre"></span>
+            </div>
+            <div class="form-group">
+              <label for="servicio">Servicio</label>
+              <div class="select-wrap">
+                <select id="servicio" required>
+                  <option value="" disabled selected>Selecciona un servicio</option>
+                  <option value="Corte Clásico (S/ 20)">Corte Clásico — S/ 20</option>
+                  <option value="Fade Premium (S/ 30)">Fade Premium — S/ 30</option>
+                  <option value="Arreglo de Barba (S/ 20)">Arreglo de Barba — S/ 20</option>
+                  <option value="Corte + Barba (S/ 45)">Corte + Barba — S/ 45</option>
+                </select>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <span class="form-error" id="error-servicio"></span>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" required />
+                <span class="form-error" id="error-fecha"></span>
+              </div>
+              <div class="form-group">
+                <label for="hora">Hora</label>
+                <input type="time" id="hora" min="09:00" max="20:00" required />
+                <span class="form-error" id="error-hora"></span>
+              </div>
+            </div>
+            <button type="submit" class="btn-whatsapp">
+              <i class="fab fa-whatsapp"></i>
+              Reservar por WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MODAL RECORDATORIO ===================== -->
+  <!-- Se muestra tras hacer la reserva por WhatsApp -->
+  <div id="reminder-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">&times;</button>
+      <div class="modal-icon"><i class="fas fa-calendar-check"></i></div>
+      <h3 id="modal-title">¡Reserva enviada!</h3>
+      <p class="modal-msg">
+        Te recomendamos volver aproximadamente dentro de <strong>21 días</strong> para mantener tu corte en perfecto
+        estado.
+      </p>
+      <button class="btn-calendar" id="btn-calendar">
+        <i class="fab fa-google"></i>
+        Agregar recordatorio al calendario
+      </button>
+      <p class="modal-hint">Abrirá Google Calendar con el evento ya preparado.</p>
+    </div>
+  </div>
+
+  <!-- ===================== CONTACTO ===================== -->
+  <section id="contacto" class="section-contact">
+    <div class="container">
+      <div class="section-header" data-animate>
+        <p class="eyebrow">Encuéntranos</p>
+        <h2>Contacto</h2>
+      </div>
+      <div class="contact-grid" data-animate>
+
+        <div class="contact-card contact-card--link"
+          onclick="window.open('https://www.google.com/maps/place/Minka+Barber+Studio/@-8.0236829,-79.0698664,17z/data=!3m1!4b1!4m6!3m5!1s0x91ad3f32aa33fee5:0x20c8c66414561f7c!8m2!3d-8.0236829!4d-79.0672915!16s%2Fg%2F11ll3fq372?entry=tts','_blank')">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h4>Dirección</h4>
+          <p>Av. Arequipa 1234, Miraflores<br />Trujillo, Perú</p>
+          <span class="contact-map-hint"><i class="fas fa-external-link-alt"></i> Ver en Google Maps</span>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-clock"></i></div>
+          <h4>Horario</h4>
+          <p>Lunes – Viernes: 9am – 8pm<br />Sábados: 9am – 6pm</p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+          <h4>WhatsApp</h4>
+          <p>+51 901259859</p>
+          <a href="https://wa.me/51901259859?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Minka%20Barber%20Studio"
+            target="_blank" rel="noopener noreferrer" class="btn-wa-contact">
+            <i class="fab fa-whatsapp"></i> Chatear ahora
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <h4>Email</h4>
+          <p>hola@minkabarberstudio.pe</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#inicio" class="logo footer-logo">
+            <span class="logo-icon"> </span>
+            <div class="logo-text">
+              <span class="logo-main">MINKA</span>
+              <span class="logo-sub">BARBER STUDIO</span>
+            </div>
+          </a>
+          <p>Precisión y estilo en cada detalle.<br />Trujillo, Perú.</p>
+        </div>
+        <div class="footer-links">
+          <h5>Navegación</h5>
+          <a href="#inicio">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#barberos">Barberos</a>
+          <a href="#reservas">Reservas</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class="footer-social">
+          <h5>Síguenos</h5>
+          <div class="social-icons">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://wa.me/51901259859" target="_blank" aria-label="WhatsApp"><i
+                class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Minka Barber Studio. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== BOTÓN FLOTANTE WHATSAPP ===================== -->
+  <a href="https://wa.me/51901259859?text=Hola%2C%20quiero%20reservar%20una%20cita%20en%20Minka%20Barber%20Studio"
+    target="_blank" class="whatsapp-float" id="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,329 @@
+/* =========================================================
+   MINKA BARBER STUDIO — script.js
+   1. Navbar scroll
+   2. Menú hamburguesa
+   3. Animaciones de entrada (IntersectionObserver)
+   4. Formulario de reserva → WhatsApp + Modal recordatorio
+   5. Validación de formulario
+   6. Carrusel de testimonios
+   7. Modal recordatorio → Google Calendar
+   ========================================================= */
+
+// ── 1. NAVBAR ────────────────────────────────────────────
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+
+// ── 2. HAMBURGUESA ───────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+
+// ── 3. ANIMACIONES DE ENTRADA ────────────────────────────
+const animateEls = document.querySelectorAll('[data-animate]');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const parent = entry.target.parentElement;
+    const staggerParents = '.services-grid,.contact-grid,.gallery-grid,.barbers-grid,.promos-grid';
+    const delay = entry.target.closest(staggerParents)
+      ? Array.from(parent.children).indexOf(entry.target) * 90
+      : 0;
+    setTimeout(() => entry.target.classList.add('visible'), delay);
+    observer.unobserve(entry.target);
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+animateEls.forEach(el => observer.observe(el));
+
+
+// ── 4 & 5. FORMULARIO → WHATSAPP ─────────────────────────
+const form         = document.getElementById('booking-form');
+const PHONE        = '51901259859';
+const fieldNombre  = document.getElementById('nombre');
+const fieldServicio= document.getElementById('servicio');
+const fieldFecha   = document.getElementById('fecha');
+const fieldHora    = document.getElementById('hora');
+const errNombre    = document.getElementById('error-nombre');
+const errServicio  = document.getElementById('error-servicio');
+const errFecha     = document.getElementById('error-fecha');
+const errHora      = document.getElementById('error-hora');
+
+function validateField(field, errorEl, msg) {
+  if (!field.value.trim()) {
+    errorEl.textContent = msg;
+    field.classList.add('invalid');
+    return false;
+  }
+  errorEl.textContent = '';
+  field.classList.remove('invalid');
+  return true;
+}
+function validateFecha(field, errorEl) {
+  if (!field.value) { errorEl.textContent = 'Por favor selecciona una fecha.'; field.classList.add('invalid'); return false; }
+  const sel = new Date(field.value + 'T00:00:00');
+  const hoy = new Date(); hoy.setHours(0,0,0,0);
+  if (sel < hoy) { errorEl.textContent = 'La fecha no puede ser en el pasado.'; field.classList.add('invalid'); return false; }
+  errorEl.textContent = ''; field.classList.remove('invalid'); return true;
+}
+function validateHora(field, errorEl) {
+  if (!field.value) { errorEl.textContent = 'Por favor selecciona una hora.'; field.classList.add('invalid'); return false; }
+  const [h] = field.value.split(':').map(Number);
+  if (h < 9 || h >= 20) { errorEl.textContent = 'Horario disponible: 9am – 8pm.'; field.classList.add('invalid'); return false; }
+  errorEl.textContent = ''; field.classList.remove('invalid'); return true;
+}
+function formatDate(str) {
+  const [y,m,d] = str.split('-'); return `${d}/${m}/${y}`;
+}
+function formatTime(str) {
+  const [h,m] = str.split(':').map(Number);
+  const sfx = h >= 12 ? 'pm' : 'am';
+  return `${String(h%12||12).padStart(2,'0')}:${String(m).padStart(2,'0')} ${sfx}`;
+}
+
+[fieldNombre, fieldServicio, fieldFecha, fieldHora].forEach(f => {
+  f.addEventListener('input', () => {
+    f.classList.remove('invalid');
+    const el = document.getElementById('error-' + f.id);
+    if (el) el.textContent = '';
+  });
+});
+
+// Variables para guardar fecha/hora de la reserva (usadas en el modal)
+let reservaFecha = '';
+let reservaHora  = '';
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const v1 = validateField(fieldNombre,   errNombre,   'Por favor ingresa tu nombre.');
+  const v2 = validateField(fieldServicio, errServicio, 'Por favor selecciona un servicio.');
+  const v3 = validateFecha(fieldFecha, errFecha);
+  const v4 = validateHora(fieldHora, errHora);
+  if (!v1 || !v2 || !v3 || !v4) return;
+
+  // Guardar para el modal
+  reservaFecha = fieldFecha.value; // "YYYY-MM-DD"
+  reservaHora  = fieldHora.value;  // "HH:MM"
+
+  const nombre   = fieldNombre.value.trim();
+  const servicio = fieldServicio.value;
+  const fecha    = formatDate(reservaFecha);
+  const hora     = formatTime(reservaHora);
+
+  const mensaje =
+    `¡Hola! 👋 Quiero reservar una cita en *Minka Barber Studio*:\n\n` +
+    `👤 *Nombre:* ${nombre}\n` +
+    `✂️ *Servicio:* ${servicio}\n` +
+    `📅 *Fecha:* ${fecha}\n` +
+    `🕐 *Hora:* ${hora}\n\n` +
+    `Por favor confirmar disponibilidad. ¡Gracias!`;
+
+  // Abrir WhatsApp
+  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(mensaje)}`, '_blank');
+
+  // Mostrar modal de recordatorio tras abrir WhatsApp
+  setTimeout(() => openReminderModal(), 800);
+});
+
+// Fecha mínima = hoy
+(function setMinDate() {
+  const hoy  = new Date();
+  const yyyy = hoy.getFullYear();
+  const mm   = String(hoy.getMonth() + 1).padStart(2, '0');
+  const dd   = String(hoy.getDate()).padStart(2, '0');
+  fieldFecha.min = `${yyyy}-${mm}-${dd}`;
+})();
+
+
+// ── 6. CARRUSEL DE TESTIMONIOS ───────────────────────────
+(function initCarousel() {
+  const track  = document.getElementById('testimonials-track');
+  const dotsWrap = document.getElementById('carousel-dots');
+  const btnPrev= document.getElementById('carousel-prev');
+  const btnNext= document.getElementById('carousel-next');
+
+  if (!track) return;
+
+  const cards = Array.from(track.children);
+  const total = cards.length;
+  let current = 0;
+  let autoTimer;
+
+  // Calcular cuántas tarjetas se ven a la vez según el ancho
+  function visibleCount() {
+    if (window.innerWidth <= 640)  return 1;
+    if (window.innerWidth <= 900)  return 2;
+    return 3;
+  }
+
+  // Crear dots
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    const pages = Math.ceil(total / visibleCount());
+    for (let i = 0; i < pages; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Página ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+  }
+
+  function updateDots() {
+    const page = Math.floor(current / visibleCount());
+    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === page);
+    });
+  }
+
+  function goTo(pageIndex) {
+    const vis = visibleCount();
+    const maxPage = Math.ceil(total / vis) - 1;
+    const safeIndex = Math.max(0, Math.min(pageIndex, maxPage));
+    current = safeIndex * vis;
+
+    // Calcular offset: ancho de una card + gap (24px)
+    const cardW = track.children[0].getBoundingClientRect().width;
+    const gap   = 24;
+    const offset = current * (cardW + gap);
+    track.style.transform = `translateX(-${offset}px)`;
+    updateDots();
+  }
+
+  function next() {
+    const vis = visibleCount();
+    const maxPage = Math.ceil(total / vis) - 1;
+    const currentPage = Math.floor(current / vis);
+    goTo(currentPage >= maxPage ? 0 : currentPage + 1);
+  }
+  function prev() {
+    const vis = visibleCount();
+    const maxPage = Math.ceil(total / vis) - 1;
+    const currentPage = Math.floor(current / vis);
+    goTo(currentPage <= 0 ? maxPage : currentPage - 1);
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(next, 4500);
+  }
+  function stopAuto() {
+    clearInterval(autoTimer);
+  }
+
+  btnNext.addEventListener('click', () => { next(); startAuto(); });
+  btnPrev.addEventListener('click', () => { prev(); startAuto(); });
+
+  // Pausar auto al pasar el mouse
+  track.addEventListener('mouseenter', stopAuto);
+  track.addEventListener('mouseleave', startAuto);
+
+  // Soporte touch (swipe)
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; stopAuto(); }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+    startAuto();
+  });
+
+  // Rebuild al cambiar tamaño de pantalla
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      buildDots();
+      goTo(0);
+    }, 200);
+  });
+
+  buildDots();
+  goTo(0);
+  startAuto();
+})();
+
+
+// ── 7. MODAL RECORDATORIO → GOOGLE CALENDAR ──────────────
+const modalOverlay = document.getElementById('reminder-modal');
+const modalClose   = document.getElementById('modal-close');
+const btnCalendar  = document.getElementById('btn-calendar');
+
+function openReminderModal() {
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeReminderModal() {
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeReminderModal);
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) closeReminderModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeReminderModal();
+});
+
+// Botón "Agregar recordatorio al calendario"
+btnCalendar.addEventListener('click', () => {
+  if (!reservaFecha || !reservaHora) return;
+
+  // Calcular fecha 21 días después
+  const [ay, am, ad] = reservaFecha.split('-').map(Number);
+  const [hh, hm]     = reservaHora.split(':').map(Number);
+
+  const startDate = new Date(ay, am - 1, ad + 21, hh, hm, 0);
+  const endDate   = new Date(startDate.getTime() + 60 * 60 * 1000); // +1 hora
+
+  // Formato Google Calendar: YYYYMMDDTHHMMSS
+  function toGCal(d) {
+    return d.getFullYear()
+      + String(d.getMonth() + 1).padStart(2,'0')
+      + String(d.getDate()).padStart(2,'0')
+      + 'T'
+      + String(d.getHours()).padStart(2,'0')
+      + String(d.getMinutes()).padStart(2,'0')
+      + '00';
+  }
+
+  const gcParams = new URLSearchParams({
+    action:  'TEMPLATE',
+    text:    'Volver a Minka Barber Studio',
+    dates:   `${toGCal(startDate)}/${toGCal(endDate)}`,
+    details: 'Recordatorio para realizar un nuevo corte en Minka Barber Studio.',
+    location:'Minka Barber Studio, Trujillo, Perú'
+  });
+
+  window.open(`https://calendar.google.com/calendar/render?${gcParams.toString()}`, '_blank');
+  closeReminderModal();
+});
+
+
+// ── 8. SMOOTH SCROLL ─────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    const id = anchor.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
+    if (target) {
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 12;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
